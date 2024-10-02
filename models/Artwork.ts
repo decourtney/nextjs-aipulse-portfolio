@@ -5,7 +5,6 @@ export interface ArtworkDocument extends mongoose.Document {
   name: string;
   description: string;
   category: string
-  medium: CategoryType;
   src: string;
   alt: string;
 }
@@ -25,11 +24,6 @@ const ArtworkSchema = new mongoose.Schema<ArtworkDocument>({
   category: {
     type: String,
     enum: categoryValues,
-  },
-  medium: {
-    type: String,
-    required: [true, "Please specify the medium."],
-    maxlength: [40, "Medium cannot be more than 40 characters long"],
   },
   src: {
     type: String,

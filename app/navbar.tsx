@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { use, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { init } from "next/dist/compiled/webpack/webpack";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
