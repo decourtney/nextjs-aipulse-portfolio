@@ -4,7 +4,6 @@ import { CategoryType, categoryValues } from "@/lib/categories";
 export interface ArtworkDocument extends mongoose.Document {
   name: string;
   description: string;
-  category: string
   src: string;
   alt: string;
 }
@@ -20,10 +19,6 @@ const ArtworkSchema = new mongoose.Schema<ArtworkDocument>({
     type: String,
     required: [true, "Please provide a description."],
     maxlength: [255, "Description cannot be more than 255 characters long"],
-  },
-  category: {
-    type: String,
-    enum: categoryValues,
   },
   src: {
     type: String,

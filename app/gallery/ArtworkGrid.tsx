@@ -90,7 +90,7 @@ const ArtworkGrid = ({
           >
             <CardBody className="p-0">
               {/* TODO - be sure to add src path for aws */}
-              <Image src={art.src} alt={art.alt} width={"100%"} />
+              <Image src={art.src} alt={art.description} width={"100%"} />
             </CardBody>
           </Card>
         ))}
