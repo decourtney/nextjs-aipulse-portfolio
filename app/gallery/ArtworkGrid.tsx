@@ -85,12 +85,16 @@ const ArtworkGrid = ({
             key={index}
             isPressable
             fullWidth
-            onPress={() => router.replace(`${pathName}/${art.name}`)}
+            onPress={() => router.replace(`${pathName}/${art.src}`)}
             className="my-2"
           >
             <CardBody className="p-0">
               {/* TODO - be sure to add src path for aws */}
-              <Image src={art.src} alt={art.description} width={"100%"} />
+              <Image
+                src={`https://${process.env.NEXT_PUBLIC_AWS_S3_THUMBNAIL_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/thumbnail-${art.src}`}
+                alt={art.description}
+                width={"100%"}
+              />
             </CardBody>
           </Card>
         ))}
