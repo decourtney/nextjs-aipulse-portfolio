@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { CategoryType, categoryValues } from "@/lib/categories";
 
 export interface ArtworkDocument extends mongoose.Document {
   name: string;
