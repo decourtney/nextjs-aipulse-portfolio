@@ -1,49 +1,43 @@
-// ArtworkPage.tsx
 import React from "react";
 import Artwork, { ArtworkDocument } from "@/models/Artwork";
 import ArtworkDisplay from "./ArtworkDisplay";
+import { notFound } from "next/navigation";
 
-const ArtworkPage = async ({
-  params,
-}: {
-  params: { category: string; artwork: string };
-}) => {
-  const { category, artwork: artworkName } = params;
-  const decodedArtworkName = decodeURIComponent(artworkName);
+const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
+  const { artwork: artworkFilename } = params;
+  const decodedArtworkFilename = decodeURIComponent(artworkFilename);
 
-  if (!decodedArtworkName || !category) return null;
+  if (!decodedArtworkFilename) return notFound();
 
-  // const res = await fetch(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/api/gallery/${category}/${decodedArtworkName}`
-  // );
-  // const data = await res.json();
-
-  // if (artworksData.error) {
-  //   // Handle error (e.g., show a 404 page)
-  //   return <div>{artworksData.error}</div>;
-  // }
-
-  // const { artwork, prevArtworkName, nextArtworkName } = data;
-
-  const artworksData = await Artwork.find(
-    category === "all" ? {} : { category }
-  ).sort({ name: 1 }); // Adjust the sort field as needed
-
+  // Fetch all artworks to enable navigation between artworks
+  const artworksData = await Artwork.find().sort({ name: 1 }); // Adjust sorting as needed
   const artworks: ArtworkDocument[] = JSON.parse(JSON.stringify(artworksData));
 
-  const index = artworks.findIndex((art) => art.name === decodedArtworkName);
+  // Find the index of the currently displayed artwork
+  const index = artworks.findIndex(
+    (art) => art.filename === decodedArtworkFilename
+  );
+
   if (index === -1) {
-    return <div>{"Could not find that artwork"}</div>;
+    // If the artwork is not found, return a 404 page
+    return notFound();
   }
 
   const artwork = artworks[index];
-  const prevArtworkName = index > 0 ? artworks[index - 1].name : null;
-  const nextArtworkName =
-    index < artworks.length - 1 ? artworks[index + 1].name : null;
+  const prevArtworkFilename = index > 0 ? artworks[index - 1].filename : null;
+  const nextArtworkFilename =
+    index < artworks.length - 1 ? artworks[index + 1].filename : null;
+
+  // The src here will point to the original full-size image on S3
+  const fullSizeSrc = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${artwork.src}`;
 
   return (
     <div>
-     <ArtworkDisplay artwork={artwork} prevArtworkName={prevArtworkName} nextArtworkName={nextArtworkName}/>
+      <ArtworkDisplay
+        artwork={artwork}
+        prevArtworkFilename={prevArtworkFilename}
+        nextArtworkFilename={nextArtworkFilename}
+      />
     </div>
   );
 };

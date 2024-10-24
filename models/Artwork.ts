@@ -17,6 +17,7 @@ const ArtworkSchema = new mongoose.Schema<ArtworkDocument>({
   },
   filename: {
     type: String,
+    unique: true,
     required: [true, "Please provide a filename."],
     maxlength: [60, "Filename cannot be more than 60 characters long"],
   },
