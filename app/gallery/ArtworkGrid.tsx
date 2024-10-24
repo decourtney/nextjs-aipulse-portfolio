@@ -85,7 +85,7 @@ const ArtworkGrid = ({
             key={index}
             isPressable
             fullWidth
-            onPress={() => router.replace(`${pathName}/${art.src}`)}
+            onPress={() => router.replace(`${pathName}/${art.filename}`)}
             className="my-2"
           >
             <CardBody className="p-0">

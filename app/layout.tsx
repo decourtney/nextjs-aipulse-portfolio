@@ -17,22 +17,22 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gena Courtney",
-  description: "Southern Art",
+  title: "PulseArt",
+  description: "Interpreting our world through art",
   openGraph: {
-    title: "Gena Courtney",
-    description: "Southern Art",
-    url: "https://genacourtney.com",
-    siteName: "Next.js",
+    title: "PulseArt",
+    description: "Interpreting our world through art",
+    url: "",
+    siteName: "PulseArt",
     images: [
       {
-        secureUrl: "https://genacourtney.com/images/INSERT_IMAGE",
+        secureUrl: "https://INSERT_IMAGE",
         url: "https://nextjs.org/og.png",
         width: 800,
         height: 600,
       },
       {
-        secureUrl: "https://genacourtney.com/images/INSERT_IMAGE",
+        secureUrl: "https://INSERT_IMAGE",
         url: "https://nextjs.org/og-alt.png",
         width: 1800,
         height: 1600,
@@ -43,10 +43,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gena Courtney",
-    description: "Southern Art",
+    title: "PulseArt",
+    description: "Interpreting our world through art",
     creator: "Donovan Courtney",
-    images: ["https://genacourtney.com/images/INSERT_IMAGE"],
+    images: ["https://INSERT_IMAGE"],
   },
 };
 
