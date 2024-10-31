@@ -32,13 +32,13 @@ const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
   const fullSizeSrc = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${artwork.src}`;
 
   return (
-    <div>
+    <section id="artwork-page">
       <ArtworkDisplay
         artwork={artwork}
         prevArtworkFilename={prevArtworkFilename}
         nextArtworkFilename={nextArtworkFilename}
       />
-    </div>
+    </section>
   );
 };
 

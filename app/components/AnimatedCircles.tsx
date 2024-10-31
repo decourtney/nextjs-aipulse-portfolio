@@ -49,12 +49,12 @@ const AnimatedCircles = () => {
       <div
         id="circle1"
         ref={circle1Ref}
-        className="absolute top-1/2 left-[20%] w-[500px] h-[500px] opacity-10 rounded-full blur-3xl -z-10"
+        className="absolute top-1/2 left-[20%] w-[500px] h-[500px] opacity-10 rounded-full blur-3xl"
       ></div>
       <div
         id="circle2"
         ref={circle2Ref}
-        className="absolute top-0 right-[20%] w-[300px] h-[300px] opacity-10 rounded-full blur-3xl -z-10"
+        className="absolute top-0 right-[20%] w-[300px] h-[300px] opacity-10 rounded-full blur-3xl"
       ></div>
     </>
   );

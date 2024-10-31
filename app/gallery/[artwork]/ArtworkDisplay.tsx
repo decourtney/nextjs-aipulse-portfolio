@@ -25,7 +25,7 @@ const ArtworkDisplay = ({
   return (
     <>
       {/* Display the artwork */}
-      <h1>{artwork.name}</h1>
+      <h2>{artwork.name}</h2>
       <Image
         src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/${artwork.src}`}
         alt={artwork.alt}

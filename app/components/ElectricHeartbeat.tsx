@@ -180,7 +180,7 @@ const ElectricHeartbeat = () => {
       gsap.fromTo(
         circle1,
         {
-          scale: 0.1,
+          scale: 0,
           backgroundColor: cloudColor,
         } as gsap.TweenVars,
         {
@@ -197,7 +197,7 @@ const ElectricHeartbeat = () => {
       gsap.fromTo(
         circle2,
         {
-          scale: 0.1,
+          scale: 0,
           backgroundColor: cloudColor,
         } as gsap.TweenVars,
         {
@@ -293,7 +293,7 @@ const ElectricHeartbeat = () => {
   return (
     <svg
       ref={svgRef}
-      className="absolute top-0 left-0 w-full h-full pointer-events-none blur-sm -z-10"
+      className="absolute top-0 left-0 w-full h-full pointer-events-none blur-sm"
     />
   );
 };

@@ -33,7 +33,7 @@ const NavBar = () => {
         transformOrigin: "top",
         // scaleY: 0,
         opacity: 0,
-        transition: {delay: 0.3, staggerChildren: 0.1 },
+        transition: { delay: 0.3, staggerChildren: 0.1 },
       },
     },
   };
@@ -45,7 +45,6 @@ const NavBar = () => {
 
   return (
     <Navbar
-      // className="h-[5rem]"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       maxWidth="xl"
@@ -63,7 +62,7 @@ const NavBar = () => {
 
       <NavbarContent justify="center">
         <NavbarBrand>
-          <p className="font-bold text-3xl tracking-widest text-indigo-400 hover:text-white transition-all">
+          <p className="font-bold text-3xl tracking-widest text-indigo-400 transition-all">
             PulseArt
           </p>
         </NavbarBrand>
@@ -74,7 +73,7 @@ const NavBar = () => {
         <NavbarItem>
           <Link
             href="/"
-            className="hover:text-indigo-400 transition duration-200"
+            className="text-white hover:text-indigo-400 transition duration-200"
           >
             <p>Home</p>
           </Link>
@@ -83,18 +82,9 @@ const NavBar = () => {
         <NavbarItem>
           <Link
             href="/gallery"
-            className="hover:text-indigo-400 transition duration-200"
+            className="text-white hover:text-indigo-400 transition duration-200"
           >
             <p>Gallery</p>
-          </Link>
-        </NavbarItem>
-
-        <NavbarItem>
-          <Link
-            href="/contact"
-            className="hover:text-indigo-400 transition duration-200"
-          >
-            <p>Contact</p>
           </Link>
         </NavbarItem>
       </NavbarContent>

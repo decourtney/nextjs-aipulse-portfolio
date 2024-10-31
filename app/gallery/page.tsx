@@ -2,7 +2,7 @@ import React from "react";
 import ArtworkGrid from "./ArtworkGrid";
 import Artwork from "@/models/Artwork";
 
-const artworkPerPage = 10;
+const artworkPerPage = 1;
 
 const GalleryPage = async ({
   params,
@@ -12,9 +12,11 @@ const GalleryPage = async ({
   searchParams: { page: string };
 }) => {
   const page = parseInt(searchParams.page || "1", 10);
-  const adjustedArtworkPerPage = artworkPerPage * page + 1; // Fetch artworks up to the current page plus 1 to determine if there are more documents
+  const skip = (page - 1) * artworkPerPage;
+  const adjustedArtworkPerPage = artworkPerPage + 1; // Fetch artworks up to the current page plus 1 to determine if there are more documents
 
   const artworksData = await Artwork.find()
+    .skip(skip)
     .limit(adjustedArtworkPerPage)
     .sort({ name: 1 }) // Adjust the sort field as needed
     .lean();
@@ -27,11 +29,11 @@ const GalleryPage = async ({
   }
 
   return (
-    <section className="min-h-dvh">
-      <div className="w-full items-center my-12 text-9xl text-center text-[hsl(var(--nextui-primary))]">
-        <h1>GALLERY</h1>
-      </div>
-      <div className="w-3/4 mx-auto">
+    <section id="gallery-page" className="h-full">
+      {/* <div className="w-full flex items-center justify-center my-12">
+        <h1 className="text-4xl font-semibold text-gray-700">Gallery</h1>
+      </div> */}
+      <div className="w-full mx-auto">
         <ArtworkGrid artworks={artworks} hasMore={hasMore} currentPage={page} />
       </div>
     </section>

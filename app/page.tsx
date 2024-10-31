@@ -3,7 +3,7 @@ import ElectricHeartbeat from "./components/ElectricHeartbeat";
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen h-screen overflow-hidden text-white">
+    <div className="h-screen overflow-hidden">
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center h-full px-4 text-center">
         <h1 className="text-4xl font-bold">

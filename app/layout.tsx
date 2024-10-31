@@ -58,17 +58,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} text-white`}
       >
         <Providers>
           <Navbar />
-          <main> {children}</main>
+          <main className="min-h-screen bg-gradient-to-b from-background from-50% to-secondary to-90%">
+            {children}
+          </main>
           <Footer />
         </Providers>
       </body>

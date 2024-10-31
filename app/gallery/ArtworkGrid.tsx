@@ -1,12 +1,12 @@
-// ArtworkGrid.tsx (Client Component)
+// ArtworkGrid.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { ArtworkDocument } from "@/models/Artwork";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import Masonry from "react-masonry-css";
-import { usePathname, useRouter,  } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const ArtworkGrid = ({
   artworks,
@@ -18,88 +18,115 @@ const ArtworkGrid = ({
   currentPage: number;
 }) => {
   const [artworkList, setArtworkList] = useState<ArtworkDocument[]>([]);
+  const [currentPageState, setCurrentPageState] = useState(currentPage);
   const router = useRouter();
   const pathName = usePathname();
-  // const [hasMoreArtwork, setHasMore] = useState(hasMore);
-  // const [artworkList, setArtworkList] =
-  //   useState<ArtworkDocument[]>(initialArtworks);
-  // const [offset, setOffset] = useState(initialArtworks.length);
-  // const searchParams = useSearchParams();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setArtworkList(artworks);
-    window.history.replaceState(null, "", `${pathName}`); // Clean URL of searchParams without refreshing the page
-  }, [artworks, pathName]);
+    setArtworkList([...artworkList, ...artworks]);
+    setCurrentPageState(currentPage);
+    window.history.replaceState(null, "", `${pathName}`);
+  }, [artworks, pathName, currentPage]);
 
   const getNextPage = () => {
-    router.replace(`${pathName}?page=${currentPage + 1}`, {
+    if (!hasMore) return;
+    router.replace(`${pathName}?page=${currentPageState + 1}`, {
       scroll: false,
     });
   };
 
-  console.log("pathName:", pathName);
+  useLayoutEffect(() => {
+    const checkContentHeight = () => {
+      if (containerRef.current) {
+        const contentHeight = containerRef.current.offsetHeight;
+        const viewportHeight = window.innerHeight;
 
-  // const fetchArtwork = async () => {
-  //   try {
-  //     const { artworks, hasMore } = await getCategoryArtwork(
-  //       category,
-  //       limit.toString(),
-  //       offset.toString()
-  //     );
+        if (contentHeight < viewportHeight && hasMore) {
+          getNextPage();
+        }
+      }
+    };
 
-  //     //  const res = await fetch(
-  //     //    `http://localhost:3000/api/gallery/${category}?offset=${offset}&limit=${limit}`
-  //     //  );
+    // Initial check
+    checkContentHeight();
 
-  //     setHasMore(hasMore);
-  //     setArtworkList((prev) => [...prev, ...artworks]);
-  //     setOffset((prev) => prev + artworks.length);
-  //   } catch (error) {
-  //     console.error("Failed to fetch artwork:", error);
-  //   }
-  // };
+    // Check when images load
+    const images = containerRef.current?.getElementsByTagName("img");
+    if (images) {
+      let imagesLoaded = 0;
+
+      const onImageLoad = () => {
+        imagesLoaded += 1;
+        if (imagesLoaded === images.length) {
+          checkContentHeight();
+        }
+      };
+
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].complete) {
+          imagesLoaded += 1;
+        } else {
+          images[i].addEventListener("load", onImageLoad);
+        }
+      }
+
+      if (imagesLoaded === images.length) {
+        checkContentHeight();
+      }
+
+      return () => {
+        for (let i = 0; i < images.length; i++) {
+          images[i].removeEventListener("load", onImageLoad);
+        }
+      };
+    }
+  }, [artworkList, hasMore]);
 
   if (artworkList.length === 0) return <p>No artwork available.</p>;
 
   const breakpointColumnsObj = {
-    default: 4,
-    1100: 3,
-    700: 2,
-    500: 1,
+    default: 6,
+    1536: 5,
+    1280: 4,
+    1024: 3,
+    768: 2,
+    640: 2,
   };
 
   return (
-    <InfiniteScroll
-      dataLength={artworkList.length}
-      next={getNextPage}
-      hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
-    >
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="flex w-auto"
-        columnClassName="p-1"
+    <div ref={containerRef}>
+      <InfiniteScroll
+        dataLength={artworkList.length}
+        next={getNextPage}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
       >
-        {artworkList.map((art: ArtworkDocument, index: number) => (
-          <Card
-            key={index}
-            isPressable
-            fullWidth
-            onPress={() => router.replace(`${pathName}/${art.filename}`)}
-            className="my-2"
-          >
-            <CardBody className="p-0">
-              {/* TODO - be sure to add src path for aws */}
-              <Image
-                src={`https://${process.env.NEXT_PUBLIC_AWS_S3_THUMBNAIL_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/thumbnail-${art.src}`}
-                alt={art.description}
-                width={"100%"}
-              />
-            </CardBody>
-          </Card>
-        ))}
-      </Masonry>
-    </InfiniteScroll>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto"
+          columnClassName="p-1"
+        >
+          {artworkList.map((art: ArtworkDocument, index: number) => (
+            <Card
+              key={index}
+              isPressable
+              fullWidth
+              onPress={() => router.replace(`${pathName}/${art.filename}`)}
+              className="my-2"
+            >
+              <CardBody className="p-0">
+                <Image
+                  src={`https://${process.env.NEXT_PUBLIC_AWS_S3_THUMBNAIL_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/thumbnail-${art.src}`}
+                  alt={art.description}
+                  width={"100%"}
+                />
+              </CardBody>
+            </Card>
+          ))}
+        </Masonry>
+      </InfiniteScroll>
+    </div>
   );
 };
 

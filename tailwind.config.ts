@@ -10,21 +10,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "test-gradient": "linear-gradient(90deg, #FFC593 0%, #BC7198 100%)",
-        "pulse-gradient":
-          "linear-gradient(135deg, #1A1A1D 0%, #229799 100%, #F8485E 200%)",
-      },
-      colors: {
-        // Custom palette for Pulse's abstract and expressive style
-        "pulse-dark": "#1A1A1D", // Dark background for contrast
-        "pulse-primary": "#48CFCB", // Bright teal to represent dynamic, bold contrast
-        "pulse-secondary": "#F8485E", // Vivid red for emotional contrast
-        "pulse-accent": "#FFD700", // Gold accent for highlights and intensity
-        "pulse-gray": "#424242", // Gray to balance darker emotional tones
-        "pulse-light": "#F5F5F5", // Light background for high contrast with bold colors
-        "pulse-muted": "#BC7198", // Muted purple to provide a calming secondary tone
-      },
+      // backgroundImage: {
+      //   "test-gradient": "linear-gradient(90deg, #FFC593 0%, #BC7198 100%)",
+      //   "pulse-gradient":
+      //     "linear-gradient(135deg, #1A1A1D 0%, #229799 100%, #F8485E 200%)",
+      // },
+      // colors: {
+      //   // Custom palette for Pulse's abstract and expressive style
+      //   "pulse-dark": "#1A1A1D", // Dark background for contrast
+      //   "pulse-primary": "#F8485E", // Bright teal to represent dynamic, bold contrast
+      //   "pulse-secondary": "#F8485E", // Vivid red for emotional contrast
+      //   "pulse-accent": "#FFD700", // Gold accent for highlights and intensity
+      //   "pulse-gray": "#424242", // Gray to balance darker emotional tones
+      //   "pulse-light": "#F5F5F5", // Light background for high contrast with bold colors
+      //   "pulse-muted": "#BC7198", // Muted purple to provide a calming secondary tone
+      // },
     },
   },
   plugins: [
@@ -61,21 +61,21 @@ const config: Config = {
         light: {
           layout: {},
           colors: {
-            background: "#F5F5F5",
-            foreground: "#229799",
-            primary: "#F8485E", // Strong, emotional red for contrast
-            secondary: "#424242",
-            content1: "#FFD700", // Gold as an accent color
+            background: "#F5F5F5", // Light gray for a clean, neutral background
+            foreground: "#229799", // Calm teal, easy on the eyes and provides contrast
+            primary: "#F8485E", // Strong, emotional red for a vibrant contrast
+            secondary: "#424242", // Dark gray for supporting text and elements
+            content1: "#FFD700", // Gold for accenting important elements and highlights
           },
         },
         dark: {
           layout: {},
           colors: {
-            background: "#111827",
-            foreground: "#48CFCB", // Bright teal for the dark theme
-            primary: "#F8485E", // Vivid red for emotional energy
-            secondary: "#424242",
-            content1: "#FFD700", // Accent color for pops of light
+            background: "#111827", // Very dark gray for a comfortable dark theme
+            foreground: "#48CFCB", // Bright teal, stands out well against the dark background
+            primary: "#F8485E", // Vivid red for high contrast and emotional energy
+            secondary: "#424242", // Dark gray, suitable for secondary elements
+            content1: "#FFD700", // Gold as an accent for highlights and focus
           },
         },
       },
