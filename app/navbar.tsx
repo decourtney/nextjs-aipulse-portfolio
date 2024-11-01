@@ -51,7 +51,7 @@ const NavBar = () => {
       height="5rem"
       shouldHideOnScroll
       isBlurred={false}
-      className="text-foreground"
+      className="text-foreground bg-opacity-80"
     >
       {/* Center the Brand */}
       <NavbarContent justify="center" className="md:hidden">
@@ -69,22 +69,16 @@ const NavBar = () => {
       </NavbarContent>
 
       {/* Navbar Links */}
-      <NavbarContent justify="end" className="hidden md:flex space-x-8">
+      <NavbarContent justify="end" className="hidden md:flex space-x-8 ">
         <NavbarItem>
-          <Link
-            href="/"
-            className=" transition duration-200"
-          >
-            <p>Home</p>
+          <Link href="/" className="transition duration-200">
+            <p className="font-bold">Home</p>
           </Link>
         </NavbarItem>
 
         <NavbarItem>
-          <Link
-            href="/gallery"
-            className=" transition duration-200"
-          >
-            <p>Gallery</p>
+          <Link href="/gallery" className="transition duration-200">
+            <p className="font-bold">Gallery</p>
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -97,9 +91,7 @@ const NavBar = () => {
         <motion.div variants={itemVariants}>
           <NavbarMenuItem>
             <Link href="/" onPress={handleClose}>
-              <p className="text-5xl transition">
-                Home
-              </p>
+              <p className="font-bold text-5xl transition duration-200">Home</p>
             </Link>
           </NavbarMenuItem>
         </motion.div>
@@ -107,7 +99,7 @@ const NavBar = () => {
         <motion.div variants={itemVariants}>
           <NavbarMenuItem as={motion.div}>
             <Link href="/gallery" onPress={handleClose}>
-              <p className="text-5xl transition">
+              <p className="font-bold text-5xl transition duration-200">
                 Gallery
               </p>
             </Link>

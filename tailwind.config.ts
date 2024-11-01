@@ -61,11 +61,14 @@ const config: Config = {
         light: {
           layout: {},
           colors: {
-            background: "#111827", // Light gray for a clean, neutral background
-            foreground: "#48CFCB", // Calm teal, easy on the eyes and provides contrast
-            primary: "#F8485E", // Strong, emotional red for a vibrant contrast
-            secondary: "#424242", // Dark gray for supporting text and elements
-            content1: "#111827", // Light gray
+            background: "#111827", // Deep slate
+            foreground: "#48CFCB", // Soft teal
+            primary: "#3BA3A0", // Calming teal
+            secondary: "#1F2937", // Dark charcoal grey
+            content1: "#E5E7EB", // Light cool grey (for general text)
+            content2: "#94A3B8", // Cool blue-grey
+            content3: "#A7F3D0", // Muted mint (for headers/accent text)
+            content4: "#6EE7B7", // Light mint green
           },
         },
         dark: {
@@ -75,10 +78,10 @@ const config: Config = {
             foreground: "#48CFCB", // Soft teal
             primary: "#3BA3A0", // Calming teal
             secondary: "#1F2937", // Dark charcoal grey
-            content1: "#1E293B", // Consistent with background
-            content2: "#374151", // Medium dark slate
-            content3: "#6EE7B7", // Light mint green
-            content4: "#94A3B8", // Cool blue-grey
+            content1: "#E5E7EB", // Light cool grey (for general text)
+            content2: "#94A3B8", // Cool blue-grey
+            content3: "#A7F3D0", // Muted mint (for headers/accent text)
+            content4: "#6EE7B7", // Light mint green
           },
         },
       },

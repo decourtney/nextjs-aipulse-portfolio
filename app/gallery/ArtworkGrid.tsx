@@ -14,6 +14,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import Masonry from "react-masonry-css";
 import { usePathname, useRouter } from "next/navigation";
+import { useDevice } from "../providers";
 
 const ArtworkGrid = ({
   artworks,
@@ -24,6 +25,7 @@ const ArtworkGrid = ({
   hasMore: boolean;
   currentPage: number;
 }) => {
+  const { isMobile } = useDevice();
   const router = useRouter();
   const pathName = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -140,8 +142,14 @@ const ArtworkGrid = ({
               onPress={() => router.push(`${pathName}/${art.filename}`)}
               // onMouseOver={() => console.log("Hovered")}
             >
-              <CardHeader className="absolute w-full h-full z-20 top-0 text-left text-3xl text-content1 bg-secondary bg-opacity-10 hover:bg-opacity-75">
-                <h3 className="">{art.name}</h3>
+              <CardHeader
+                className={`absolute w-full h-full z-20 top-0 font-black text-left text-lg text-content1 break-words bg-gradient-to-b to-content1/0 to-50% ${
+                  isMobile
+                    ? "text-opacity-90 from-secondary/100 from-5%"
+                    : "text-opacity-30 hover:text-opacity-90 from-secondary/30 from-0% hover:from-secondary/100 hover:from-10%"
+                } `}
+              >
+                <h3 className="w-full h-full">{art.name}</h3>
               </CardHeader>
               <CardBody className="p-0">
                 <Image

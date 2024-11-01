@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Providers } from "./providers";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
@@ -61,14 +62,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Use next/headers to get the user-agent
+  const headersList = headers();
+  const userAgent = headersList.get("user-agent") || "";
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(userAgent);
+
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} text-content4`}
+        className={`${geistSans.variable} ${geistMono.variable} text-content1`}
       >
-        <Providers>
+        <Providers isMobile={isMobile}>
           <Navbar />
-          <main className="min-h-[100dvh - 80px] bg-gradient-to-b from-background from-50% to-foreground to-90%">
+          <main className="min-h-[100dvh-80px] bg-gradient-to-b from-background from-10% to-foreground to-100%">
             {children}
           </main>
           <Footer />
