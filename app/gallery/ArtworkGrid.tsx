@@ -1,41 +1,75 @@
 // ArtworkGrid.tsx
 "use client";
 
-import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
+import React, {
+  useLayoutEffect,
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
+import { ArtworkContext } from "../ArtworkContext";
 import { ArtworkDocument } from "@/models/Artwork";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Card, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import Masonry from "react-masonry-css";
 import { usePathname, useRouter } from "next/navigation";
 
 const ArtworkGrid = ({
   artworks,
-  hasMore,
-  currentPage,
+  hasMore: more,
+  currentPage: page,
 }: {
   artworks: ArtworkDocument[];
   hasMore: boolean;
   currentPage: number;
 }) => {
-  const [artworkList, setArtworkList] = useState<ArtworkDocument[]>([]);
-  const [currentPageState, setCurrentPageState] = useState(currentPage);
   const router = useRouter();
   const pathName = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const artworkContext = useContext(ArtworkContext);
+  if (!artworkContext) return null;
+  const {
+    artworkList,
+    setArtworkList,
+    currentPage,
+    setCurrentPage,
+    hasMore,
+    setHasMore,
+  } = artworkContext;
+
+  // Number of columns for the masonry grid matching Tailwind default breakpoints
+  const breakpointColumnsObj = {
+    default: 6,
+    1536: 5,
+    1280: 4,
+    1024: 3,
+    768: 2,
+    640: 2,
+  };
+
   useEffect(() => {
+    if (!hasMore) return;
+
     setArtworkList([...artworkList, ...artworks]);
-    setCurrentPageState(currentPage);
+    setCurrentPage(page);
+    setHasMore(more);
+
     window.history.replaceState(null, "", `${pathName}`);
-  }, [artworks, pathName, currentPage]);
+  }, [artworks, pathName]);
 
   const getNextPage = () => {
     if (!hasMore) return;
-    router.replace(`${pathName}?page=${currentPageState + 1}`, {
+    router.replace(`${pathName}?page=${currentPage + 1}`, {
       scroll: false,
     });
   };
 
+  /**
+   *  Since the initial fetch of X number of artworks might not fill the viewport,
+   *  we need to compare the current content height to the viewport height and fetch more if necessary
+   */
   useLayoutEffect(() => {
     const checkContentHeight = () => {
       if (containerRef.current) {
@@ -83,17 +117,6 @@ const ArtworkGrid = ({
     }
   }, [artworkList, hasMore]);
 
-  if (artworkList.length === 0) return <p>No artwork available.</p>;
-
-  const breakpointColumnsObj = {
-    default: 6,
-    1536: 5,
-    1280: 4,
-    1024: 3,
-    768: 2,
-    640: 2,
-  };
-
   return (
     <div ref={containerRef}>
       <InfiniteScroll
@@ -105,16 +128,21 @@ const ArtworkGrid = ({
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="flex w-auto"
-          columnClassName="p-1"
+          columnClassName="p-2"
         >
           {artworkList.map((art: ArtworkDocument, index: number) => (
             <Card
               key={index}
+              className="my-4"
               isPressable
               fullWidth
-              onPress={() => router.replace(`${pathName}/${art.filename}`)}
-              className="my-2"
+              isHoverable
+              onPress={() => router.push(`${pathName}/${art.filename}`)}
+              // onMouseOver={() => console.log("Hovered")}
             >
+              <CardHeader className="absolute w-full h-full z-20 top-0 text-left text-3xl text-content1 bg-secondary bg-opacity-10 hover:bg-opacity-75">
+                <h3 className="">{art.name}</h3>
+              </CardHeader>
               <CardBody className="p-0">
                 <Image
                   src={`https://${process.env.NEXT_PUBLIC_AWS_S3_THUMBNAIL_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/thumbnail-${art.src}`}

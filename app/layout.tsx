@@ -64,11 +64,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} text-content4`}
       >
         <Providers>
           <Navbar />
-          <main className="min-h-screen bg-gradient-to-b from-background from-50% to-secondary to-90%">
+          <main className="min-h-[100dvh - 80px] bg-gradient-to-b from-background from-50% to-foreground to-90%">
             {children}
           </main>
           <Footer />

@@ -4,8 +4,8 @@ import { BsInstagram } from "react-icons/bs";
  
 const Footer = () => {
   return (
-    <footer className="py-8 bg-secondary text-center">
-      <p className="text-sm opacity-50">© 2024 PulseArt. All rights reserved.</p>
+    <footer className="py-8 bg-foreground text-center text-content1">
+      <p className="text-sm opacity-70">© 2024 PulseArt. All rights reserved.</p>
     </footer>
   );
 };

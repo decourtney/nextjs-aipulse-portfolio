@@ -51,18 +51,18 @@ const NavBar = () => {
       height="5rem"
       shouldHideOnScroll
       isBlurred={false}
+      className="text-foreground"
     >
       {/* Center the Brand */}
       <NavbarContent justify="center" className="md:hidden">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="text-white"
         />
       </NavbarContent>
 
       <NavbarContent justify="center">
         <NavbarBrand>
-          <p className="font-bold text-3xl tracking-widest text-indigo-400 transition-all">
+          <p className="font-bold text-3xl tracking-widest transition-all">
             PulseArt
           </p>
         </NavbarBrand>
@@ -73,7 +73,7 @@ const NavBar = () => {
         <NavbarItem>
           <Link
             href="/"
-            className="text-white hover:text-indigo-400 transition duration-200"
+            className=" transition duration-200"
           >
             <p>Home</p>
           </Link>
@@ -82,7 +82,7 @@ const NavBar = () => {
         <NavbarItem>
           <Link
             href="/gallery"
-            className="text-white hover:text-indigo-400 transition duration-200"
+            className=" transition duration-200"
           >
             <p>Gallery</p>
           </Link>
@@ -97,7 +97,7 @@ const NavBar = () => {
         <motion.div variants={itemVariants}>
           <NavbarMenuItem>
             <Link href="/" onPress={handleClose}>
-              <p className="text-white text-5xl hover:text-indigo-400 transition">
+              <p className="text-5xl transition">
                 Home
               </p>
             </Link>
@@ -107,18 +107,8 @@ const NavBar = () => {
         <motion.div variants={itemVariants}>
           <NavbarMenuItem as={motion.div}>
             <Link href="/gallery" onPress={handleClose}>
-              <p className="text-white text-5xl hover:text-indigo-400 transition">
+              <p className="text-5xl transition">
                 Gallery
-              </p>
-            </Link>
-          </NavbarMenuItem>
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <NavbarMenuItem as={motion.div} variants={itemVariants}>
-            <Link href="/contact" onPress={handleClose}>
-              <p className="text-white text-5xl hover:text-indigo-400 transition">
-                Contact
               </p>
             </Link>
           </NavbarMenuItem>

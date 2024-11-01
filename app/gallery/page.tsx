@@ -2,7 +2,7 @@ import React from "react";
 import ArtworkGrid from "./ArtworkGrid";
 import Artwork from "@/models/Artwork";
 
-const artworkPerPage = 1;
+const artworkPerPage = 6;
 
 const GalleryPage = async ({
   params,
@@ -29,14 +29,14 @@ const GalleryPage = async ({
   }
 
   return (
-    <section id="gallery-page" className="h-full">
+    <div id="gallery-page" className="min-h-screen p-2">
       {/* <div className="w-full flex items-center justify-center my-12">
         <h1 className="text-4xl font-semibold text-gray-700">Gallery</h1>
       </div> */}
       <div className="w-full mx-auto">
         <ArtworkGrid artworks={artworks} hasMore={hasMore} currentPage={page} />
       </div>
-    </section>
+    </div>
   );
 };
 
