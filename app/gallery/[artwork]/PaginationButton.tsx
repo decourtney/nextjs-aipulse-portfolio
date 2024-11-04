@@ -10,7 +10,9 @@ const PaginationButton = ({
 }) => {
   return (
     <div
-      className={`${!artworkFilename ? "hidden":""} absolute top-0 ${direction}-0 h-full content-center text-center overflow-clip z-50`}
+      className={`${
+        !artworkFilename ? "hidden" : ""
+      } absolute top-0 ${direction}-0 h-full content-center text-center overflow-clip z-50`}
     >
       <Link
         href={`/gallery/${artworkFilename}`}

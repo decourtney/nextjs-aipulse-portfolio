@@ -35,7 +35,7 @@ const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
   return (
     <section
       id="artwork-page"
-      className="flex items-center min-h-[calc(100dvh-164px)]"
+      className="flex lg:items-center min-h-[calc(100dvh-116px)] lg:min-h-[calc(100dvh-164px)]"
     >
       <ArtworkDisplay
         artwork={artwork}

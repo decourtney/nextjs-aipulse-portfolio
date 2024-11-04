@@ -8,6 +8,14 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    "left-0",
+    "right-0",
+    "-scale-x-100",
+    "scale-x-100",
+    "scale-x-125",
+    "-scale-x-125",
+  ],
   theme: {
     extend: {
       // backgroundImage: {
