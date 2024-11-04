@@ -11,7 +11,7 @@ const LandingPage = () => {
         </h1>
         <p className="mt-4 text-lg opacity-75 max-w-xl">
           AI-generated visuals interpreting current events, news, and popular
-          culture. sectione into a unique blend of art and technology.
+          culture. Dive into a unique blend of art and technology.
         </p>
 
         {/* Call to Action - Button to Gallery */}

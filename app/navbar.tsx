@@ -72,13 +72,13 @@ const NavBar = () => {
       <NavbarContent justify="end" className="hidden md:flex space-x-8 ">
         <NavbarItem>
           <Link href="/" className="transition duration-200">
-            <p className="font-bold">Home</p>
+            <p className="font-bold hover:text-content3">Home</p>
           </Link>
         </NavbarItem>
 
         <NavbarItem>
           <Link href="/gallery" className="transition duration-200">
-            <p className="font-bold">Gallery</p>
+            <p className="font-bold hover:text-content3">Gallery</p>
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -91,7 +91,9 @@ const NavBar = () => {
         <motion.div variants={itemVariants}>
           <NavbarMenuItem>
             <Link href="/" onPress={handleClose}>
-              <p className="font-bold text-5xl transition duration-200">Home</p>
+              <p className="font-bold hover:text-content3 text-5xl transition duration-200">
+                Home
+              </p>
             </Link>
           </NavbarMenuItem>
         </motion.div>
@@ -99,7 +101,7 @@ const NavBar = () => {
         <motion.div variants={itemVariants}>
           <NavbarMenuItem as={motion.div}>
             <Link href="/gallery" onPress={handleClose}>
-              <p className="font-bold text-5xl transition duration-200">
+              <p className="font-bold hover:text-content3 text-5xl transition duration-200">
                 Gallery
               </p>
             </Link>

@@ -65,8 +65,10 @@ export default function RootLayout({
   // Use next/headers to get the user-agent
   const headersList = headers();
   const userAgent = headersList.get("user-agent") || "";
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(userAgent);
-
+  const isMobile =
+    /(android.+mobile|iphone|ipod|ipad|blackberry|bb10|mini|windows\sce|palm)/i.test(
+      userAgent
+    );
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
@@ -74,7 +76,7 @@ export default function RootLayout({
       >
         <Providers isMobile={isMobile}>
           <Navbar />
-          <main className="min-h-[100dvh-80px] bg-gradient-to-b from-background from-10% to-foreground to-100%">
+          <main className="bg-gradient-to-b from-background from-10% to-foreground to-100%">
             {children}
           </main>
           <Footer />

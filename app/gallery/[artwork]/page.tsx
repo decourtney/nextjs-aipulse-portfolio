@@ -2,6 +2,7 @@ import React from "react";
 import Artwork, { ArtworkDocument } from "@/models/Artwork";
 import ArtworkDisplay from "./ArtworkDisplay";
 import { notFound } from "next/navigation";
+import PaginationButton from "./PaginationButton";
 
 const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
   const { artwork: artworkFilename } = params;
@@ -32,7 +33,10 @@ const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
   const fullSizeSrc = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${artwork.src}`;
 
   return (
-    <section id="artwork-page">
+    <section
+      id="artwork-page"
+      className="flex items-center min-h-[calc(100dvh-164px)]"
+    >
       <ArtworkDisplay
         artwork={artwork}
         prevArtworkFilename={prevArtworkFilename}

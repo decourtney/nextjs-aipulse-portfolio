@@ -143,7 +143,7 @@ const ArtworkGrid = ({
               // onMouseOver={() => console.log("Hovered")}
             >
               <CardHeader
-                className={`absolute w-full h-full z-20 top-0 font-black text-left text-lg text-content1 break-words bg-gradient-to-b to-content1/0 to-50% ${
+                className={`absolute w-full h-full z-20 top-0 font-black text-content4 text-left text-lg sm:text-4xl md:text-2xl xl:text-3xl break-words bg-gradient-to-b to-content1/0 to-50% ${
                   isMobile
                     ? "text-opacity-90 from-secondary/100 from-5%"
                     : "text-opacity-30 hover:text-opacity-90 from-secondary/30 from-0% hover:from-secondary/100 hover:from-10%"
