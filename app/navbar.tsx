@@ -51,10 +51,11 @@ const NavBar = () => {
       height="5rem"
       shouldHideOnScroll
       isBlurred={false}
-      className="text-foreground bg-opacity-80"
+      className="text-foreground bg-opacity-50"
+      onScrollPositionChange={(position) => {console.log(position)}}
     >
       {/* Center the Brand */}
-      <NavbarContent justify="center" className="md:hidden">
+      <NavbarContent justify="start" className="md:hidden">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
@@ -62,7 +63,7 @@ const NavBar = () => {
 
       <NavbarContent justify="center">
         <NavbarBrand>
-          <p className="font-bold text-3xl tracking-widest transition-all">
+          <p className="font-bold text-4xl lg:text-6xl tracking-widest transition-all">
             PulseArt
           </p>
         </NavbarBrand>
@@ -71,14 +72,20 @@ const NavBar = () => {
       {/* Navbar Links */}
       <NavbarContent justify="end" className="hidden md:flex space-x-8 ">
         <NavbarItem>
-          <Link href="/" className="transition duration-200">
-            <p className="font-bold hover:text-content3">Home</p>
+          <Link
+            href="/"
+            className="transition duration-200 font-bold lg:text-3xl hover:text-content3"
+          >
+            <p>Home</p>
           </Link>
         </NavbarItem>
 
         <NavbarItem>
-          <Link href="/gallery" className="transition duration-200">
-            <p className="font-bold hover:text-content3">Gallery</p>
+          <Link
+            href="/gallery"
+            className="transition duration-200 font-bold lg:text-3xl hover:text-content3"
+          >
+            <p>Gallery</p>
           </Link>
         </NavbarItem>
       </NavbarContent>
