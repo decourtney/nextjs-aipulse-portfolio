@@ -38,10 +38,10 @@ const ArtworkDisplay = ({
   });
 
   const handleSwipeClickNext = () => {
-    router.push(`/gallery/${nextArtworkFilename}`);
+    router.replace(`/gallery/${nextArtworkFilename}`);
   };
   const handleSwipeClickPrev = () => {
-    router.push(`/gallery/${prevArtworkFilename}`);
+    router.replace(`/gallery/${prevArtworkFilename}`);
   };
 
   const handleContextMenu = (event: React.MouseEvent) => {
@@ -69,7 +69,7 @@ const ArtworkDisplay = ({
         </Tooltip>
       )} */}
 
-      <Card className="bg-transparent shadow-none rounded-none">
+      <Card className="bg-transparent shadow-none rounded-none select-none">
         <CardBody className="grid grid-cols-12 gap-2 content-center">
           <div className="mx-auto col-span-12 lg:col-span-6 lg:col-start-2">
             <Image
@@ -102,7 +102,7 @@ const ArtworkDisplay = ({
               </h3>
             </div>
 
-            <p className=" font-semibold lg:text-2xl text-content1">
+            <p className="font-semibold lg:text-2xl text-content1">
               {artwork.description}
             </p>
           </div>

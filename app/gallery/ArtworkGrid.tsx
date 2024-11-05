@@ -1,4 +1,3 @@
-// ArtworkGrid.tsx
 "use client";
 
 import React, {
@@ -43,8 +42,7 @@ const ArtworkGrid = ({
 
   // Number of columns for the masonry grid matching Tailwind default breakpoints
   const breakpointColumnsObj = {
-    default: 6,
-    1536: 5,
+    default: 4,
     1280: 4,
     1024: 3,
     768: 2,
@@ -129,34 +127,42 @@ const ArtworkGrid = ({
       >
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="flex w-auto"
-          columnClassName="p-2"
+          className="flex w-full"
+          columnClassName="p-0"
         >
           {artworkList.map((art: ArtworkDocument, index: number) => (
             <Card
               key={index}
-              className="my-4"
+              className="group w-full bg-transparent rounded-none shadow-none select-none"
               isPressable
-              fullWidth
               isHoverable
               onPress={() => router.push(`${pathName}/${art.filename}`)}
-              // onMouseOver={() => console.log("Hovered")}
             >
-              <CardHeader
-                className={`absolute w-full h-full z-20 top-0 font-black text-content4 text-left text-lg sm:text-4xl md:text-2xl xl:text-3xl break-words bg-gradient-to-b to-content1/0 to-50% ${
-                  isMobile
-                    ? "text-opacity-90 from-secondary/100 from-5%"
-                    : "text-opacity-30 hover:text-opacity-90 from-secondary/30 from-0% hover:from-secondary/100 hover:from-10%"
-                } `}
-              >
-                <h3 className="w-full h-full">{art.name}</h3>
-              </CardHeader>
-              <CardBody className="p-0">
+              <CardBody className="relative p-0">
                 <Image
                   src={`https://${process.env.NEXT_PUBLIC_AWS_S3_THUMBNAIL_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/thumbnail-${art.src}`}
                   alt={art.description}
-                  width={"100%"}
+                  width="100%"
+                  className="object-cover rounded-none"
+                  onContextMenu={(event) => event.preventDefault()}
+                  draggable={false}
                 />
+
+                {/* Gradient Overlay and SVG Icon */}
+                <div className="absolute inset-0 flex justify-center items-center w-full h-full z-10 pointer-events-none">
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse at center, transparent, rgba(0,0,0,0.7))] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                  {/* SVG Icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                    fill="hsl(var(--nextui-content3))"
+                    className="w-[96px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                  >
+                    <path d="M483.18-280q12.82 0 21.32-8.63 8.5-8.62 8.5-21.37v-180q0-12.75-8.68-21.38-8.67-8.62-21.5-8.62-12.82 0-21.32 8.62-8.5 8.63-8.5 21.38v180q0 12.75 8.68 21.37 8.67 8.63 21.5 8.63Zm-3.2-314q14.02 0 23.52-9.2T513-626q0-14.45-9.48-24.22-9.48-9.78-23.5-9.78t-23.52 9.78Q447-640.45 447-626q0 13.6 9.48 22.8 9.48 9.2 23.5 9.2Zm.29 514q-82.74 0-155.5-31.5Q252-143 197.5-197.5t-86-127.34Q80-397.68 80-480.5t31.5-155.66Q143-709 197.5-763t127.34-85.5Q397.68-880 480.5-880t155.66 31.5Q709-817 763-763t85.5 127Q880-563 880-480.27q0 82.74-31.5 155.5Q817-252 763-197.68q-54 54.31-127 86Q563-80 480.27-80Zm.23-60Q622-140 721-239.5t99-241Q820-622 721.19-721T480-820q-141 0-240.5 98.81T140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z" />
+                    ;
+                  </svg>
+                </div>
               </CardBody>
             </Card>
           ))}

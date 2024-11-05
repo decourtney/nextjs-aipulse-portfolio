@@ -29,10 +29,16 @@ const GalleryPage = async ({
   }
 
   return (
-    <div id="gallery-page" className="min-h-screen p-2">
-      {/* <div className="w-full flex items-center justify-center my-12">
-        <h1 className="text-4xl font-semibold text-gray-700">Gallery</h1>
-      </div> */}
+    <div id="gallery-page" className="min-h-screen">
+      <div className="max-w-[1024px] h-auto mx-auto px-4 py-24 lg:py-48">
+        <p className="text-2xl lg:text-5xl font-semibold text-content2">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat
+          optio labore culpa, excepturi ipsa omnis fuga ipsum a odit blanditiis
+          ratione vitae possimus aspernatur repellendus nulla, cupiditate eius
+          unde! Ullam!
+        </p>
+      </div>
+
       <div className="w-full mx-auto">
         <ArtworkGrid artworks={artworks} hasMore={hasMore} currentPage={page} />
       </div>
