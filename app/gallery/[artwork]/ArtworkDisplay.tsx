@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { ArtworkDocument } from "@/models/Artwork";
 import { Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import { useParams, useRouter } from "next/navigation";
@@ -8,6 +10,7 @@ import PaginationButton from "./PaginationButton";
 import { useDevice } from "../../providers";
 import { useSwipeable } from "react-swipeable";
 import Tooltip from "@/app/components/Tooltip";
+import Fade from "@/app/components/Fade";
 
 const ArtworkDisplay = ({
   artwork,
@@ -54,6 +57,17 @@ const ArtworkDisplay = ({
     // setTooltipVisible(false);
   };
 
+  const handleImageLoad = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    const imgElement = event.currentTarget as HTMLImageElement;
+    console.log(imgElement);
+    imgElement.classList.add("block");
+    imgElement.classList.remove("hidden");
+  };
+
+  const [imageIsLoaded, setImageIsLoaded] = useState(false);
+
   return (
     <div {...swipeableHandlers} className="relative">
       {/* Not currently using a tooltip for this build. however, it will be utilized in a client build. Leaving here for easy implementation */}
@@ -69,45 +83,43 @@ const ArtworkDisplay = ({
         </Tooltip>
       )} */}
 
-      <Card className="bg-transparent shadow-none rounded-none select-none">
-        <CardBody className="grid grid-cols-12 gap-2 content-center">
-          <div className="mx-auto col-span-12 lg:col-span-6 lg:col-start-2">
-            <Image
-              className="w-[1024px] h-auto object-cover aspect-square"
-              src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/${artwork.src}`}
-              alt={artwork.alt}
-              radius="none"
-              onContextMenu={handleContextMenu}
-              draggable={false}
-            />
+      <div className="grid grid-cols-12 gap-2 content-center">
+        <div className="mx-auto col-span-12 lg:col-span-6 lg:col-start-2">
+          <Image
+            className="w-[1024px] h-auto aspect-square"
+            src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/${artwork.src}`}
+            alt={artwork.alt}
+            onContextMenu={handleContextMenu}
+            draggable={false}
+            radius="none"
+          />
 
-            {isMobile && (
-              <div className="relative w-full h-6 mt-2">
-                <PaginationButton
-                  direction={"left"}
-                  handleOnClick={handleSwipeClickPrev}
-                />
-                <PaginationButton
-                  direction={"right"}
-                  handleOnClick={handleSwipeClickNext}
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="col-span-12 lg:col-span-4 space-y-4 my-auto">
-            <div className="content-center">
-              <h3 className="font-black text-3xl lg:text-6xl text-content4 text-center lg:text-left">
-                {artwork.name}
-              </h3>
+          {isMobile && (
+            <div className="relative w-full h-6 mt-2">
+              <PaginationButton
+                direction={"left"}
+                handleOnClick={handleSwipeClickPrev}
+              />
+              <PaginationButton
+                direction={"right"}
+                handleOnClick={handleSwipeClickNext}
+              />
             </div>
+          )}
+        </div>
 
-            <p className="font-semibold lg:text-2xl text-content1">
-              {artwork.description}
-            </p>
+        <div className="col-span-12 lg:col-span-4 space-y-4 my-auto">
+          <div className="content-center">
+            <h3 className="font-black text-3xl lg:text-6xl text-content4 text-center lg:text-left">
+              {artwork.name}
+            </h3>
           </div>
-        </CardBody>
-      </Card>
+
+          <p className="font-semibold lg:text-2xl text-content1">
+            {artwork.description}
+          </p>
+        </div>
+      </div>
 
       {!isMobile && (
         <>
