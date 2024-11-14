@@ -10,7 +10,6 @@ import PaginationButton from "./PaginationButton";
 import { useDevice } from "../../providers";
 import { useSwipeable } from "react-swipeable";
 import Tooltip from "@/app/components/Tooltip";
-import Fade from "@/app/components/Fade";
 
 const ArtworkDisplay = ({
   artwork,
@@ -40,11 +39,14 @@ const ArtworkDisplay = ({
     trackMouse: true,
   });
 
-  const handleSwipeClickNext = () => {
-    router.replace(`/gallery/${nextArtworkFilename}`);
-  };
   const handleSwipeClickPrev = () => {
+    if (!prevArtworkFilename) return;
     router.replace(`/gallery/${prevArtworkFilename}`);
+  };
+
+  const handleSwipeClickNext = () => {
+    if (!nextArtworkFilename) return;
+    router.replace(`/gallery/${nextArtworkFilename}`);
   };
 
   const handleContextMenu = (event: React.MouseEvent) => {
@@ -53,24 +55,19 @@ const ArtworkDisplay = ({
     // setTooltipVisible(true);
   };
 
+  {
+    /* Not currently using a tooltip for this build. however, it will be utilized in a client build. Leaving here for easy implementation */
+  }
   const closeTooltip = () => {
     // setTooltipVisible(false);
   };
 
-  const handleImageLoad = (
-    event: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {
-    const imgElement = event.currentTarget as HTMLImageElement;
-    console.log(imgElement);
-    imgElement.classList.add("block");
-    imgElement.classList.remove("hidden");
-  };
-
-  const [imageIsLoaded, setImageIsLoaded] = useState(false);
-
   return (
-    <div {...swipeableHandlers} className="relative">
-      {/* Not currently using a tooltip for this build. however, it will be utilized in a client build. Leaving here for easy implementation */}
+    <div
+      {...swipeableHandlers}
+      className="relative"
+      style={{ touchAction: "pan-down" }}
+    >
       {/* {tooltipVisible && (
         <Tooltip
           x={tooltipPosition.x}
@@ -83,8 +80,8 @@ const ArtworkDisplay = ({
         </Tooltip>
       )} */}
 
-      <div className="grid grid-cols-12 gap-2 content-center">
-        <div className="mx-auto col-span-12 lg:col-span-6 lg:col-start-2">
+      <div className="grid grid-cols-12 gap-2 content-center select-none">
+        <div className="relative mx-auto col-span-12 xl:col-span-6 xl:col-start-2">
           <Image
             className="w-[1024px] h-auto aspect-square"
             src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/${artwork.src}`}
@@ -92,30 +89,37 @@ const ArtworkDisplay = ({
             onContextMenu={handleContextMenu}
             draggable={false}
             radius="none"
+            shadow="md"
           />
 
           {isMobile && (
-            <div className="relative w-full h-6 mt-2">
-              <PaginationButton
-                direction={"left"}
-                handleOnClick={handleSwipeClickPrev}
-              />
-              <PaginationButton
-                direction={"right"}
-                handleOnClick={handleSwipeClickNext}
-              />
-            </div>
+            <>
+              <div className="w-full h-auto">
+                {prevArtworkFilename && (
+                  <PaginationButton
+                    direction={"left"}
+                    handleOnClick={handleSwipeClickPrev}
+                  />
+                )}
+                {nextArtworkFilename && (
+                  <PaginationButton
+                    direction={"right"}
+                    handleOnClick={handleSwipeClickNext}
+                  />
+                )}
+              </div>
+            </>
           )}
         </div>
 
-        <div className="col-span-12 lg:col-span-4 space-y-4 my-auto">
+        <div className="col-span-12 xl:col-span-4 space-y-4 my-auto px-4 py-4">
           <div className="content-center">
-            <h3 className="font-black text-3xl lg:text-6xl text-content4 text-center lg:text-left">
+            <h3 className="xl:w-3/4 font-black text-3xl lg:text-5xl 2xl:text-6xl text-content4 text-center xl:text-left">
               {artwork.name}
             </h3>
           </div>
 
-          <p className="font-semibold lg:text-2xl text-content1">
+          <p className="md:w-3/4 xl:w-full mx-auto font-semibold lg:text-2xl text-content1">
             {artwork.description}
           </p>
         </div>
@@ -123,14 +127,18 @@ const ArtworkDisplay = ({
 
       {!isMobile && (
         <>
-          <PaginationButton
-            direction={"left"}
-            handleOnClick={handleSwipeClickPrev}
-          />
-          <PaginationButton
-            direction={"right"}
-            handleOnClick={handleSwipeClickNext}
-          />
+          {prevArtworkFilename && (
+            <PaginationButton
+              direction={"left"}
+              handleOnClick={handleSwipeClickPrev}
+            />
+          )}
+          {nextArtworkFilename && (
+            <PaginationButton
+              direction={"right"}
+              handleOnClick={handleSwipeClickNext}
+            />
+          )}
         </>
       )}
     </div>

@@ -47,34 +47,35 @@ const NavBar = () => {
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      maxWidth="xl"
+      maxWidth="2xl"
       height="5rem"
       shouldHideOnScroll
       isBlurred={false}
-      className="text-foreground bg-opacity-50"
-      onScrollPositionChange={(position) => {console.log(position)}}
+      className="bg-opacity-50"
+      // onScrollPositionChange={(position) => {console.log(position)}}
     >
       {/* Center the Brand */}
-      <NavbarContent justify="start" className="md:hidden">
+      <NavbarContent justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="md:hidden"
         />
-      </NavbarContent>
+        {/* </NavbarContent>
 
-      <NavbarContent justify="center">
+      <NavbarContent> */}
         <NavbarBrand>
-          <p className="font-bold text-4xl lg:text-6xl tracking-widest transition-all">
+          <p className="font-bold text-content3 text-2xl lg:text-4xl tracking-widest transition-all">
             PulseArt
           </p>
         </NavbarBrand>
       </NavbarContent>
 
       {/* Navbar Links */}
-      <NavbarContent justify="end" className="hidden md:flex space-x-8 ">
+      <NavbarContent justify="end" className="hidden md:flex space-x-8">
         <NavbarItem>
           <Link
             href="/"
-            className="transition duration-200 font-bold lg:text-3xl hover:text-content3"
+            className="transition duration-200 font-bold lg:text-3xl text-content1 hover:text-content3"
           >
             <p>Home</p>
           </Link>
@@ -83,7 +84,7 @@ const NavBar = () => {
         <NavbarItem>
           <Link
             href="/gallery"
-            className="transition duration-200 font-bold lg:text-3xl hover:text-content3"
+            className="transition duration-200 font-bold lg:text-3xl text-content1 hover:text-content3"
           >
             <p>Gallery</p>
           </Link>
@@ -92,13 +93,13 @@ const NavBar = () => {
 
       {/* Mobile Menu */}
       <NavbarMenu
-        className="flex-col justify-center items-center pb-[8rem] gap-y-12"
+        className="pt-36 text-center gap-y-12 z-50"
         motionProps={containerVariants}
       >
         <motion.div variants={itemVariants}>
           <NavbarMenuItem>
             <Link href="/" onPress={handleClose}>
-              <p className="font-bold hover:text-content3 text-5xl transition duration-200">
+              <p className="font-bold text-content1 hover:text-content3 text-5xl transition duration-200">
                 Home
               </p>
             </Link>
@@ -106,9 +107,9 @@ const NavBar = () => {
         </motion.div>
 
         <motion.div variants={itemVariants}>
-          <NavbarMenuItem as={motion.div}>
+          <NavbarMenuItem>
             <Link href="/gallery" onPress={handleClose}>
-              <p className="font-bold hover:text-content3 text-5xl transition duration-200">
+              <p className="font-bold text-content1 hover:text-content3 text-5xl transition duration-200">
                 Gallery
               </p>
             </Link>

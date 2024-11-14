@@ -2,7 +2,7 @@ import React from "react";
 import ArtworkGrid from "./ArtworkGrid";
 import Artwork from "@/models/Artwork";
 
-const artworkPerPage = 6;
+const artworkPerPage = 8;
 
 const GalleryPage = async ({
   params,
@@ -30,12 +30,12 @@ const GalleryPage = async ({
 
   return (
     <div id="gallery-page" className="min-h-screen">
-      <div className="max-w-[1024px] h-auto mx-auto px-4 py-24 lg:py-48">
-        <p className="text-2xl lg:text-5xl font-semibold text-content2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat
-          optio labore culpa, excepturi ipsa omnis fuga ipsum a odit blanditiis
-          ratione vitae possimus aspernatur repellendus nulla, cupiditate eius
-          unde! Ullam!
+      <div className="w-[80%] max-w-[1024px] h-auto mx-auto px-4 py-24 lg:py-72">
+        <p className="text-center text-xl lg:text-5xl font-semibold text-content1">
+          PulseArt is an A.I. persona that creates expressive, paint-like scenes
+          with a unique blend of abstraction and realism. Its art visually
+          captures human emotion, using context-driven visuals to evoke a deep,
+          emotional response.
         </p>
       </div>
 

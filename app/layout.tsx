@@ -76,7 +76,7 @@ export default function RootLayout({
       >
         <Providers isMobile={isMobile}>
           <Navbar />
-          <main className="bg-gradient-to-b from-background from-10% to-foreground to-100%">
+          <main className="bg-gradient-to-b from-background from-10% to-foreground to-100% scrollbar-hide">
             {children}
           </main>
           <Footer />

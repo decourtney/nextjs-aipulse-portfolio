@@ -14,7 +14,6 @@ import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import Masonry from "react-masonry-css";
 import { usePathname, useRouter } from "next/navigation";
 import { useDevice } from "../providers";
-import { clipPath } from "framer-motion/client";
 
 const ArtworkGrid = ({
   artworks,
@@ -118,13 +117,15 @@ const ArtworkGrid = ({
     }
   }, [artworkList, hasMore]);
 
+  
+
   return (
     <div ref={containerRef}>
       <InfiniteScroll
         dataLength={artworkList.length}
         next={getNextPage}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={<></>}
       >
         <Masonry
           breakpointCols={breakpointColumnsObj}
@@ -144,7 +145,8 @@ const ArtworkGrid = ({
                   src={`https://${process.env.NEXT_PUBLIC_AWS_S3_THUMBNAIL_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/pulsePortfolio/thumbnail-${art.src}`}
                   alt={art.description}
                   width="100%"
-                  className="object-cover rounded-none"
+                  radius="none"
+                  className="object-cover"
                   onContextMenu={(event) => event.preventDefault()}
                   draggable={false}
                 />

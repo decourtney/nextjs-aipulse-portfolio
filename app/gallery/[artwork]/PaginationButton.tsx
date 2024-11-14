@@ -10,7 +10,7 @@ const PaginationButton = ({
 }) => {
   return (
     <div
-      className={`absolute top-0 ${direction}-0 h-full content-center text-center overflow-clip z-50`}
+      className={`absolute top-0 ${direction}-0 h-full content-center text-center overflow-clip z-10`}
     >
       <Button
         disableAnimation
@@ -24,11 +24,11 @@ const PaginationButton = ({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 -960 960 960"
           fill="hsl(var(--nextui-content1))"
-          className={`lg:w-[96px] h-auto ${
+          className={`w-[48px] md:w-[72px] lg:w-[96px] h-auto ${
             direction === "left"
               ? "scale-x-100 active:scale-x-125"
               : "-scale-x-100 active:-scale-x-125"
-          } group-hover:scale-y-150 opacity-10 group-hover:opacity-50 transition ease-out hover:duration-300`}
+          } group-hover:scale-y-150 opacity-10 group-hover:opacity-80 transition ease-out hover:duration-300`}
         >
           <path
             className="transform translate-x-[50px] translate-y-[100px] scale-x-[.9] scale-y-[1.2]"

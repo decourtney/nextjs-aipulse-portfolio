@@ -1,31 +1,29 @@
 import AnimatedCircles from "./components/AnimatedCircles";
 import ElectricHeartbeat from "./components/ElectricHeartbeat";
+import { Link } from "@nextui-org/react";
 
 const LandingPage = () => {
   return (
-    <section id="landing-page" className="overflow-hidden">
-      {/* Hero Section */}
-      <div className="relative flex flex-col items-center justify-center h-[calc(100dvh-80px)] px-4 text-center">
-        <h1 className="text-4xl font-bold">
+    <section className="relative h-[calc(100dvh-80px)] overflow-clip">
+      <div className="flex flex-col justify-center items-center h-[80%] text-center z-50">
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold font-serif">
           Art Interpreting the Pulse of Our World
         </h1>
-        <p className="mt-4 text-lg opacity-75 max-w-xl">
+        <p className="mx-auto mt-4 text-sm lg:text-lg opacity-75 w-[80%] max-w-xl">
           AI-generated visuals interpreting current events, news, and popular
           culture. Dive into a unique blend of art and technology.
         </p>
 
-        {/* Call to Action - Button to Gallery */}
-        <a
+        <Link
           href="/gallery"
-          className="mt-8 inline-block px-8 py-4 bg-indigo-600 text-white rounded-md text-lg tracking-wide hover:bg-indigo-500 transition-transform duration-200 transform hover:scale-105"
+          className="inline-block mt-8 px-8 py-4 underline text-sm lg:text-lg text-content4 hover:text-content3 font-black rounded-md tracking-wide transition-transform duration-200 transform hover:scale-105 z-50"
         >
-          Explore the Gallery
-        </a>
-
-        {/* Include Client Components */}
-        <ElectricHeartbeat />
-        <AnimatedCircles />
+          <p>Explore the Gallery</p>
+        </Link>
       </div>
+
+      <ElectricHeartbeat />
+      <AnimatedCircles />
     </section>
   );
 };

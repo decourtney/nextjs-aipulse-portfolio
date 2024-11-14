@@ -293,7 +293,7 @@ const ElectricHeartbeat = () => {
   return (
     <svg
       ref={svgRef}
-      className="absolute top-0 left-0 w-full h-full pointer-events-none blur-sm"
+      className="absolute top-0 left-0 w-full h-full pointer-events-none blur-sm z-0" 
     />
   );
 };
