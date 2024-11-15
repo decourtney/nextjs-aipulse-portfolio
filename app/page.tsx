@@ -1,79 +1,31 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-
-gsap.registerPlugin(MotionPathPlugin);
+import AnimatedCircles from "./components/AnimatedCircles";
+import ElectricHeartbeat from "./components/ElectricHeartbeat";
+import { Link } from "@nextui-org/react";
 
 const LandingPage = () => {
-  // Refs for the animated circles
-  const circle1Ref = useRef<HTMLDivElement>(null);
-  const circle2Ref = useRef<HTMLDivElement>(null);
+  return (
+    <section className="relative h-[calc(100dvh-80px)] overflow-clip">
+      <div className="flex flex-col justify-center items-center h-[80%] text-center z-50">
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold font-serif">
+          Art Interpreting the Pulse of Our World
+        </h1>
+        <p className="mx-auto mt-4 text-sm lg:text-lg opacity-75 w-[80%] max-w-xl">
+          AI-generated visuals interpreting current events, news, and popular
+          culture. Dive into a unique blend of art and technology.
+        </p>
 
-  useEffect(() => {
-    // GSAP animation for the first circle (moving clockwise)
-    gsap.to(circle1Ref.current, {
-      duration: 60,
-      repeat: -1, // Infinite looping
-      ease: "linear",
-      motionPath: {
-        alignOrigin: [0.5, 0.5],
-        path: "M 0, 0 A 500,500 0 1,1 0.1,0 Z", // Clockwise motion starting at (0,0)
-        autoRotate: false, // Prevent the object itself from rotating
-        curviness: 1.25, // Adjust how curved the path is
-      },
-    });
+        <Link
+          href="/gallery"
+          className="inline-block mt-8 px-8 py-4 underline text-sm lg:text-lg text-content4 hover:text-content3 font-black rounded-md tracking-wide transition-transform duration-200 transform hover:scale-105 z-50"
+        >
+          <p>Explore the Gallery</p>
+        </Link>
+      </div>
 
-    // GSAP animation for the second circle (moving counterclockwise)
-    gsap.to(circle2Ref.current, {
-      duration: 60,
-      repeat: -1,
-      ease: "linear",
-      motionPath: {
-        alignOrigin: [0.5, 0.5],
-        path: "M 0, 0 A -400,-400 0 1,1 -0.1,0 Z", // Counterclockwise motion starting at (0,0)
-        autoRotate: false,
-        curviness: 1.25,
-      },
-    });
-  }, []);
-
- return (
-   <div className="min-h-screen overflow-hidden bg-gray-900 text-white">
-     {/* Hero Section */}
-     <section className="relative h-screen flex flex-col items-center justify-center text-center px-4">
-       <div>
-         <h1 className="text-4xl font-bold">
-           Art Interpreting the Pulse of Our World
-         </h1>
-         <p className="mt-4 text-lg opacity-75 max-w-xl">
-           AI-generated visuals interpreting current events, news, and popular
-           culture. Dive into a unique blend of art and technology.
-         </p>
-
-         {/* Call to Action - Button to Gallery */}
-         <a
-           href="/gallery"
-           className="mt-8 inline-block px-8 py-4 bg-indigo-600 text-white rounded-md text-lg tracking-wide hover:bg-indigo-500 transition-transform duration-200 transform hover:scale-105"
-         >
-           Explore the Gallery
-         </a>
-       </div>
-
-       {/* Abstract Background Shapes with GSAP Circular Motion */}
-       <div
-         ref={circle1Ref}
-         className="absolute top-1/2 left-[20%] w-[500px] h-[500px] bg-indigo-400 opacity-10 rounded-full blur-3xl"
-       ></div>
-       <div
-         ref={circle2Ref}
-         className="absolute top-0 right-[20%] w-[300px] h-[300px] bg-red-400 opacity-10 rounded-full blur-3xl"
-       ></div>
-     </section>
-   </div>
- );
-
+      <ElectricHeartbeat />
+      <AnimatedCircles />
+    </section>
+  );
 };
 
 export default LandingPage;

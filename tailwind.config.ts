@@ -8,23 +8,31 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    "left-0",
+    "right-0",
+    "-scale-x-100",
+    "scale-x-100",
+    "scale-x-125",
+    "-scale-x-125",
+  ],
   theme: {
     extend: {
-      backgroundImage: {
-        "test-gradient": "linear-gradient(90deg, #FFC593 0%, #BC7198 100%)",
-        "pulse-gradient":
-          "linear-gradient(135deg, #1A1A1D 0%, #229799 100%, #F8485E 200%)",
-      },
-      colors: {
-        // Custom palette for Pulse's abstract and expressive style
-        "pulse-dark": "#1A1A1D", // Dark background for contrast
-        "pulse-primary": "#48CFCB", // Bright teal to represent dynamic, bold contrast
-        "pulse-secondary": "#F8485E", // Vivid red for emotional contrast
-        "pulse-accent": "#FFD700", // Gold accent for highlights and intensity
-        "pulse-gray": "#424242", // Gray to balance darker emotional tones
-        "pulse-light": "#F5F5F5", // Light background for high contrast with bold colors
-        "pulse-muted": "#BC7198", // Muted purple to provide a calming secondary tone
-      },
+      // backgroundImage: {
+      //   "test-gradient": "linear-gradient(90deg, #FFC593 0%, #BC7198 100%)",
+      //   "pulse-gradient":
+      //     "linear-gradient(135deg, #1A1A1D 0%, #229799 100%, #F8485E 200%)",
+      // },
+      // colors: {
+      //   // Custom palette for Pulse's abstract and expressive style
+      //   "pulse-dark": "#1A1A1D", // Dark background for contrast
+      //   "pulse-primary": "#F8485E", // Bright teal to represent dynamic, bold contrast
+      //   "pulse-secondary": "#F8485E", // Vivid red for emotional contrast
+      //   "pulse-accent": "#FFD700", // Gold accent for highlights and intensity
+      //   "pulse-gray": "#424242", // Gray to balance darker emotional tones
+      //   "pulse-light": "#F5F5F5", // Light background for high contrast with bold colors
+      //   "pulse-muted": "#BC7198", // Muted purple to provide a calming secondary tone
+      // },
     },
   },
   plugins: [
@@ -61,21 +69,27 @@ const config: Config = {
         light: {
           layout: {},
           colors: {
-            background: "#F5F5F5",
-            foreground: "#229799",
-            primary: "#F8485E", // Strong, emotional red for contrast
-            secondary: "#424242",
-            content1: "#FFD700", // Gold as an accent color
+            background: "#111827", // Deep slate
+            foreground: "#48CFCB", // Soft teal
+            primary: "#3BA3A0", // Calming teal
+            secondary: "#1F2937", // Dark charcoal grey
+            content1: "#E5E7EB", // Light cool grey (for general text)
+            content2: "#94A3B8", // Cool blue-grey
+            content3: "#A7F3D0", // Muted mint (for headers/accent text)
+            content4: "#6EE7B7", // Light mint green
           },
         },
         dark: {
           layout: {},
           colors: {
-            background: "#111827",
-            foreground: "#48CFCB", // Bright teal for the dark theme
-            primary: "#F8485E", // Vivid red for emotional energy
-            secondary: "#424242",
-            content1: "#FFD700", // Accent color for pops of light
+            background: "#111827", // Deep slate
+            foreground: "#48CFCB", // Soft teal
+            primary: "#3BA3A0", // Calming teal
+            secondary: "#1F2937", // Dark charcoal grey
+            content1: "#E5E7EB", // Light cool grey (for general text)
+            content2: "#94A3B8", // Cool blue-grey
+            content3: "#A7F3D0", // Muted mint (for headers/accent text)
+            content4: "#6EE7B7", // Light mint green
           },
         },
       },

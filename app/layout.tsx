@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Providers } from "./providers";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
@@ -17,22 +18,22 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gena Courtney",
-  description: "Southern Art",
+  title: "PulseArt",
+  description: "Interpreting our world through art",
   openGraph: {
-    title: "Gena Courtney",
-    description: "Southern Art",
-    url: "https://genacourtney.com",
-    siteName: "Next.js",
+    title: "PulseArt",
+    description: "Interpreting our world through art",
+    url: "",
+    siteName: "PulseArt",
     images: [
       {
-        secureUrl: "https://genacourtney.com/images/INSERT_IMAGE",
+        secureUrl: "https://INSERT_IMAGE",
         url: "https://nextjs.org/og.png",
         width: 800,
         height: 600,
       },
       {
-        secureUrl: "https://genacourtney.com/images/INSERT_IMAGE",
+        secureUrl: "https://INSERT_IMAGE",
         url: "https://nextjs.org/og-alt.png",
         width: 1800,
         height: 1600,
@@ -43,10 +44,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gena Courtney",
-    description: "Southern Art",
+    title: "PulseArt",
+    description: "Interpreting our world through art",
     creator: "Donovan Courtney",
-    images: ["https://genacourtney.com/images/INSERT_IMAGE"],
+    images: ["https://INSERT_IMAGE"],
   },
 };
 
@@ -58,17 +59,26 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  // Use next/headers to get the user-agent
+  const headersList = headers();
+  const userAgent = headersList.get("user-agent") || "";
+  const isMobile =
+    /(android.+mobile|iphone|ipod|ipad|blackberry|bb10|mini|windows\sce|palm)/i.test(
+      userAgent
+    );
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} text-content1`}
       >
-        <Providers>
+        <Providers isMobile={isMobile}>
           <Navbar />
-          <main> {children}</main>
+          <main className="bg-gradient-to-b from-background from-10% to-foreground to-100% scrollbar-hide">
+            {children}
+          </main>
           <Footer />
         </Providers>
       </body>
