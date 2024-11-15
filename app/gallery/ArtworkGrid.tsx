@@ -1,19 +1,21 @@
 "use client";
 
-import React, {
-  useLayoutEffect,
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-} from "react";
-import { ArtworkContext } from "../ArtworkContext";
 import { ArtworkDocument } from "@/models/Artwork";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
-import Masonry from "react-masonry-css";
+import { Card, CardBody, Image } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
-import { useDevice } from "../providers";
+import { useContext, useEffect, useLayoutEffect, useRef } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Masonry from "react-masonry-css";
+import { ArtworkContext } from "../ArtworkContext";
+
+// Number of columns for the masonry grid matching Tailwind default breakpoints
+const breakpointColumnsObj = {
+  default: 5,
+  1280: 4,
+  1024: 3,
+  768: 2,
+  640: 2,
+};
 
 const ArtworkGrid = ({
   artworks,
@@ -24,13 +26,11 @@ const ArtworkGrid = ({
   hasMore: boolean;
   currentPage: number;
 }) => {
-  const { isMobile } = useDevice();
   const router = useRouter();
   const pathName = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
-
   const artworkContext = useContext(ArtworkContext);
-  if (!artworkContext) return null;
+
   const {
     artworkList,
     setArtworkList,
@@ -40,36 +40,6 @@ const ArtworkGrid = ({
     setHasMore,
   } = artworkContext;
 
-  // Number of columns for the masonry grid matching Tailwind default breakpoints
-  const breakpointColumnsObj = {
-    default: 5,
-    1280: 4,
-    1024: 3,
-    768: 2,
-    640: 2,
-  };
-
-  useEffect(() => {
-    if (!hasMore) return;
-
-    setArtworkList([...artworkList, ...artworks]);
-    setCurrentPage(page);
-    setHasMore(more);
-
-    window.history.replaceState(null, "", `${pathName}`);
-  }, [artworks, pathName]);
-
-  const getNextPage = () => {
-    if (!hasMore) return;
-    router.replace(`${pathName}?page=${currentPage + 1}`, {
-      scroll: false,
-    });
-  };
-
-  /**
-   *  Since the initial fetch of X number of artworks might not fill the viewport,
-   *  we need to compare the current content height to the viewport height and fetch more if necessary
-   */
   useLayoutEffect(() => {
     const checkContentHeight = () => {
       if (containerRef.current) {
@@ -117,7 +87,29 @@ const ArtworkGrid = ({
     }
   }, [artworkList, hasMore]);
 
-  
+  useEffect(() => {
+    if (!hasMore) return;
+
+    setArtworkList([...artworkList, ...artworks]);
+    setCurrentPage(page);
+    setHasMore(more);
+
+    window.history.replaceState(null, "", `${pathName}`);
+  }, [artworks, pathName]);
+
+  const getNextPage = () => {
+    if (!hasMore) return;
+    router.replace(`${pathName}?page=${currentPage + 1}`, {
+      scroll: false,
+    });
+  };
+
+    if (!artworkContext) return null;
+
+  /**
+   *  Since the initial fetch of X number of artworks might not fill the viewport,
+   *  we need to compare the current content height to the viewport height and fetch more if necessary
+   */
 
   return (
     <div ref={containerRef}>

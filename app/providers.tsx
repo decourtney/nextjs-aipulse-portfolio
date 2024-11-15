@@ -1,8 +1,8 @@
 "use client";
-import React, { createContext, useContext } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { useRouter } from "next/navigation";
+import React, { createContext, useContext } from "react";
 import { ArtworkProvider } from "./ArtworkContext";
 
 interface DeviceContextType {

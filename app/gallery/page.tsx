@@ -1,14 +1,11 @@
-import React from "react";
-import ArtworkGrid from "./ArtworkGrid";
 import Artwork from "@/models/Artwork";
+import ArtworkGrid from "./ArtworkGrid";
 
 const artworkPerPage = 10;
 
 const GalleryPage = async ({
-  params,
   searchParams,
 }: {
-  params: { category: string };
   searchParams: { page: string };
 }) => {
   const page = parseInt(searchParams.page || "1", 10);

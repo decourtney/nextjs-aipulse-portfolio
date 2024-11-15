@@ -1,8 +1,7 @@
-// context/ArtworkContext.tsx
 "use client";
 
-import React, { createContext, useState } from "react";
 import { ArtworkDocument } from "@/models/Artwork";
+import React, { createContext, useState } from "react";
 
 interface ArtworkContextType {
   artworkList: ArtworkDocument[];
@@ -13,9 +12,20 @@ interface ArtworkContextType {
   setHasMore: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ArtworkContext = createContext<ArtworkContextType | null>(null);
+export const ArtworkContext = createContext<ArtworkContextType>({
+  artworkList: [],
+  setArtworkList: () => {},
+  currentPage: 1,
+  setCurrentPage: () => {},
+  hasMore: true,
+  setHasMore: () => {},
+});
 
-export const ArtworkProvider = ({ children }: { children: React.ReactNode }) => {
+export const ArtworkProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [artworkList, setArtworkList] = useState<ArtworkDocument[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);

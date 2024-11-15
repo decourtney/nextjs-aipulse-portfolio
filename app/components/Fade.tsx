@@ -1,5 +1,5 @@
-import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 
 const Fade = ({ children }: { children: React.ReactNode }) => {
   return (
