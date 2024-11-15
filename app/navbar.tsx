@@ -10,12 +10,11 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
-import { use, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
 
   const handleClose = () => {
     setIsMenuOpen(!isMenuOpen);

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 const ElectricHeartbeat = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -293,7 +293,7 @@ const ElectricHeartbeat = () => {
   return (
     <svg
       ref={svgRef}
-      className="absolute top-0 left-0 w-full h-full pointer-events-none blur-sm z-0" 
+      className="absolute top-0 left-0 w-full h-full pointer-events-none blur-sm z-0"
     />
   );
 };

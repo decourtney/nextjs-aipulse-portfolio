@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import { ArtworkDocument } from "@/models/Artwork";
-import { Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
-import { useParams, useRouter } from "next/navigation";
-import PaginationButton from "./PaginationButton";
-import { useDevice } from "../../providers";
+import { Image } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+import React from "react";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useSwipeable } from "react-swipeable";
-import Tooltip from "@/app/components/Tooltip";
+import { useDevice } from "../../providers";
+import PaginationButton from "./PaginationButton";
 
 const ArtworkDisplay = ({
   artwork,
@@ -59,15 +57,12 @@ const ArtworkDisplay = ({
   {
     /* Not currently using a tooltip for this build. however, it will be utilized in a client build. Leaving here for easy implementation */
   }
-  const closeTooltip = () => {
-    // setTooltipVisible(false);
-  };
+  // const closeTooltip = () => {
+  //   // setTooltipVisible(false);
+  // };
 
   return (
-    <div
-      {...swipeableHandlers}
-      className="relative"
-    >
+    <div {...swipeableHandlers} className="relative">
       {/* {tooltipVisible && (
         <Tooltip
           x={tooltipPosition.x}

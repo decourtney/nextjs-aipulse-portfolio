@@ -1,8 +1,6 @@
-import React from "react";
 import Artwork, { ArtworkDocument } from "@/models/Artwork";
-import ArtworkDisplay from "./ArtworkDisplay";
 import { notFound } from "next/navigation";
-import PaginationButton from "./PaginationButton";
+import ArtworkDisplay from "./ArtworkDisplay";
 
 const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
   const { artwork: artworkFilename } = params;
@@ -28,9 +26,6 @@ const ArtworkPage = async ({ params }: { params: { artwork: string } }) => {
   const prevArtworkFilename = index > 0 ? artworks[index - 1].filename : null;
   const nextArtworkFilename =
     index < artworks.length - 1 ? artworks[index + 1].filename : null;
-
-  // The src here will point to the original full-size image on S3
-  const fullSizeSrc = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${artwork.src}`;
 
   return (
     <section
