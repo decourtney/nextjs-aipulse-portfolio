@@ -10,7 +10,7 @@ const PaginationButton = ({
 }) => {
   return (
     <div
-      className={`absolute top-0 ${direction}-0 h-full content-center text-center overflow-clip z-10`}
+      className={`absolute top-0 ${direction}-0 w-1/2 h-full overflow-clip z-10`}
     >
       <Button
         disableAnimation
@@ -26,9 +26,9 @@ const PaginationButton = ({
           fill="hsl(var(--nextui-content1))"
           className={`w-[48px] md:w-[72px] lg:w-[96px] h-auto ${
             direction === "left"
-              ? "scale-x-100 active:scale-x-125"
-              : "-scale-x-100 active:-scale-x-125"
-          } group-hover:scale-y-150 opacity-10 group-hover:opacity-80 transition ease-out hover:duration-300`}
+              ? "scale-x-100 active:scale-x-125 mr-auto"
+              : "-scale-x-100 active:-scale-x-125 ml-auto"
+          } group-hover:scale-y-150 opacity-10 group-hover:opacity-80 group- transition ease-out hover:duration-300`}
         >
           <path
             className="transform translate-x-[50px] translate-y-[100px] scale-x-[.9] scale-y-[1.2]"

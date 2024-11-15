@@ -42,7 +42,7 @@ const ArtworkGrid = ({
 
   // Number of columns for the masonry grid matching Tailwind default breakpoints
   const breakpointColumnsObj = {
-    default: 4,
+    default: 5,
     1280: 4,
     1024: 3,
     768: 2,

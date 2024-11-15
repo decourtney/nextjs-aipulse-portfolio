@@ -2,7 +2,7 @@ import React from "react";
 import ArtworkGrid from "./ArtworkGrid";
 import Artwork from "@/models/Artwork";
 
-const artworkPerPage = 8;
+const artworkPerPage = 10;
 
 const GalleryPage = async ({
   params,

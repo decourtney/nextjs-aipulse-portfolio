@@ -34,6 +34,7 @@ const ArtworkDisplay = ({
   const swipeableHandlers = useSwipeable({
     onSwipedLeft: () => handleSwipeClickNext(),
     onSwipedRight: () => handleSwipeClickPrev(),
+    onTouchStartOrOnMouseDown: () => {},
     swipeDuration: 500,
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -66,7 +67,6 @@ const ArtworkDisplay = ({
     <div
       {...swipeableHandlers}
       className="relative"
-      style={{ touchAction: "pan-down" }}
     >
       {/* {tooltipVisible && (
         <Tooltip
