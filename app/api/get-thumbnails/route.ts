@@ -1,4 +1,3 @@
-// app/api/get-thumbnails/route.ts
 import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 

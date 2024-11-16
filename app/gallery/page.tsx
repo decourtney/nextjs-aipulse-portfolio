@@ -1,7 +1,7 @@
 import Artwork from "@/models/Artwork";
 import ArtworkGrid from "./ArtworkGrid";
 
-const artworkPerPage = 10;
+const artworkPerPage = 5;
 
 const GalleryPage = async ({
   searchParams,
@@ -27,8 +27,8 @@ const GalleryPage = async ({
 
   return (
     <div id="gallery-page" className="min-h-screen">
-      <div className="w-[80%] max-w-[1024px] h-auto mx-auto px-4 py-24 lg:py-72">
-        <p className="text-center text-xl lg:text-5xl font-semibold text-content1">
+      <div className="w-[80%] max-w-[1024px] h-auto mx-auto px-4 py-24 lg:py-56">
+        <p className="text-center text-xl lg:text-4xl font-semibold text-content1">
           PulseArt is an A.I. persona that creates expressive, paint-like scenes
           with a unique blend of abstraction and realism. Its art visually
           captures human emotion, using context-driven visuals to evoke a deep,
