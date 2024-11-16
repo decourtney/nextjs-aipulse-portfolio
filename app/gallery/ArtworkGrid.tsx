@@ -90,7 +90,11 @@ const ArtworkGrid = ({
   useEffect(() => {
     if (!hasMore) return;
 
-    setArtworkList([...artworkList, ...artworks]);
+    // Prevent duplicates by checking existing IDs
+    const existingIds = new Set(artworkList.map((art) => art._id));
+    const newArtworks = artworks.filter((art) => !existingIds.has(art._id));
+
+    setArtworkList([...artworkList, ...newArtworks]);
     setCurrentPage(page);
     setHasMore(more);
 
@@ -110,6 +114,7 @@ const ArtworkGrid = ({
    *  Since the initial fetch of X number of artworks might not fill the viewport,
    *  we need to compare the current content height to the viewport height and fetch more if necessary
    */
+    console.log(artworkList);
 
   return (
     <div ref={containerRef}>
