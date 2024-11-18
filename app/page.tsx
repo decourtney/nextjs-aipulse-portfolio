@@ -13,13 +13,15 @@ const LandingPage = () => {
           AI-generated visuals interpreting current events, news, and popular
           culture. Dive into a unique blend of art and technology.
         </p>
-
         <Link
           href="/gallery"
-          className="inline-block mt-8 px-8 py-4 underline text-sm lg:text-lg text-content4 hover:text-content3 font-black rounded-md tracking-wide transition-transform duration-200 transform hover:scale-105 z-50"
+          className="inline-block mt-8 px-8 transition-transform duration-200 transform hover:scale-105 z-50"
         >
-          <p>Explore the Gallery</p>
+          <p className="underline text-sm lg:text-lg text-content4 hover:text-content3 font-black">
+            Explore the Gallery
+          </p>
         </Link>
+        <p className="font-bold text-red-300 ">Images may contain nudity</p>
       </div>
 
       <ElectricHeartbeat />
